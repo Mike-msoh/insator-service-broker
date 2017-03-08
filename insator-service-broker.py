@@ -74,7 +74,7 @@ else:
 # Global Variables : Insator Specific
 #############################################################
 
-service_dashboard = "http://www.samsungsds.com/global/en/solutions/off/insa/insator.html"
+service_dashboard = 'http://www.samsungsds.com/global/en/solutions/off/insa/insator.html'
 # service_dashboard = "http://"+service_base+"/my-service//dashboard/"
 
 credentials = {'credentials': { \

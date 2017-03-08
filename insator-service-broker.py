@@ -74,7 +74,7 @@ else:
 # Global Variables : Insator Specific
 #############################################################
 
-service_dashboard = 'http://news.samsungsds.com/wp-content/uploads/2016/10/16-1.png'
+service_dashboard = 'http://www.samsung.com/global/support/globalcontact.html'
 # service_dashboard = 'http://fido-ui-service.mybluemix.net'
 # service_dashboard = "http://"+service_base+"/my-service//dashboard/"
 

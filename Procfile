@@ -1,1 +1,1 @@
-web: python fido-service-broker.py
+web: python insator-service-broker.py

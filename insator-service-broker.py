@@ -74,7 +74,7 @@ else:
 # Global Variables : Insator Specific
 #############################################################
 
-service_dashboard = "http://www.samsungsds.com/global/en/solutions/off/insa/insator.html"
+service_dashboard = 'http://www.samsungsds.com/global/en/solutions/off/insa/insator.html'
 # service_dashboard = "http://"+service_base+"/my-service//dashboard/"
 
 credentials = {'credentials': { \
@@ -282,7 +282,7 @@ def dashboard(instance_id):
 @app.route('/<path:path>')
 def catch_all(path):
     page = '<title>insator Service Broker</title>'
-    page += '<h2>This is a sample service broker for Samsung SDS Nexsign: insator Solution</h2>'
+    page += '<h2>This is a sample service broker for Samsung SDS : insator Solution</h2>'
     page += '<p>See for details.</p>'
     page += '<p>You requested path: /%s </p>' % path
     return page

@@ -74,7 +74,7 @@ else:
 # Global Variables : Insator Specific
 #############################################################
 
-service_dashboard = 'http://www.samsungsds.com/global/en/solutions/off/insa/insator.html'
+service_dashboard = 'http://www.trademarkia.com/insator-86766326.html'
 # service_dashboard = 'http://fido-ui-service.mybluemix.net'
 # service_dashboard = "http://"+service_base+"/my-service//dashboard/"
 

@@ -3,7 +3,7 @@ import os                      # to obtain environment info
 from flask import Flask,jsonify,request,abort,make_response
 from flask_basicauth import BasicAuth
 import json
-import fido_plans
+import insator_plans
 import service
 import requests
 # from cloudant import Cloudant
@@ -12,7 +12,7 @@ import requests
 #############################################################
 # Database Setup : cloudant nosql db
 #############################################################
-# db_name = 'fidodb'
+# db_name = 'insatordb'
 # client = None
 # db = None
 
@@ -49,8 +49,8 @@ X_BROKER_API_VERSION = 2.11
 X_BROKER_API_VERSION_NAME = 'X-Broker-Api-Version'
 
 # Configure our test username
-app.config['BASIC_AUTH_USERNAME'] = 'fido-user'
-app.config['BASIC_AUTH_PASSWORD'] = 'fido-pwd'
+app.config['BASIC_AUTH_USERNAME'] = 'insator-user'
+app.config['BASIC_AUTH_PASSWORD'] = 'insator-pwd'
 # Switch off pretty printing of JSON data
 app.config['JSONIFY_PRETTYPRINT_REGULAR']=False
 
@@ -71,17 +71,17 @@ else:
 
 
 #############################################################
-# Global Variables : FIDO Specific
+# Global Variables : Insator Specific
 #############################################################
 
-fido_admin_url = "http://169.46.149.205:8102/api/v1/relyingparties"   
-service_dashboard = "http://fido-ui-service.mybluemix.net"
+service_dashboard = "http://www.samsungsds.com/global/en/solutions/off/insa/insator.html"
+# service_dashboard = "http://"+service_base+"/my-service//dashboard/"
 
-# credentials = {'credentials': { \
-#         'uri': service_dashboard, \
-#         'id': 'empty', \
-#         'apiKey': 'empty', \
-#       }}
+credentials = {'credentials': { \
+        'uri': service_dashboard, \
+        'id': 'empty', \
+        'apiKey': 'empty', \
+      }}
 
 ########################################################
 # Implement Cloud Foundry Broker API
@@ -114,7 +114,7 @@ def catalog():
     # Check broker API version
     if not api_version or float(api_version) < X_BROKER_API_VERSION:
         abort(412, "Precondition failed. Missing or incompatible %s. Expecting version %0.1f or later" % (X_BROKER_API_VERSION_NAME, X_BROKER_API_VERSION))
-    services={"services": [service.fidosvc()]}
+    services={"services": [service.insatorsvc()]}
     return jsonify(services)
 
 
@@ -151,14 +151,6 @@ def provision(instance_id):
     # get the JSON document in the BODY
     provision_details = request.get_json(force=True)
     print("Provision details : ", provision_details)
-
-    #  Bluemix Returned provision details
-    # ('Provision details : ', {u'plan_id': u'2c441056-a48a-40d4-931e-616de3bfcb8d', 
-    # u'space_guid': u'a328d651-a5a0-4d9d-b2ed-257802d11ba6', 
-    # u'organization_guid': u'408022b1-6e6e-42f3-8104-c767bf952945', 
-    # u'service_id': u'c45dcaa1-6dec-48ce-b6bc-b65cb96f437c'})
-
-    # Save API Key and RP ID from FidoAdmin
     print("In provision instance_id : ", instance_id)
 
     # if client:
@@ -191,12 +183,6 @@ def deprovision(instance_id):
 
     # deprovision would call the service here
     # not done to keep our code simple for the tutorial
-
-    ### TODO
-    # 1. Check the document of specific instance is exist in db
-    #   1-a. if exist, delete the document from db      <deleteServiceInstance>
-    #       2. if binding doc for this instance exist, delete them all <unbindAllForServiceInstance>
-    #   1-b. if not, return empty_result
 
     return jsonify(empty_result)
 
@@ -236,141 +222,21 @@ def bind(instance_id, binding_id):
     print("Binding details: " , binding_details)
 
 
-    #TODO : 
-    # Need to match the post headers and returned data in binding
-
-
-
-    #POST to Fido Admin to register client
-    # TODO
-
-    # result={"credentials":     {
-    # "createUserId": "createUserId",
-    # "status": "ENABLED",
-    # "statusMessage": "success",
-    # "apiKey": "2ce0195c-8d02-49fe-86c9-02e75c994f80", 
-    # "name": "adminapi20161847",
-    # "id": "80b3af09-f901-4886-946c-c21c274a1dcc", 
-    # "statusCode": "1200"
-    # }}
-    # return make_response(jsonify(result),201)
-
-    # result={"credentials":     
-    #             {
-    #               "statusCode": "1200",
-    #               "id": '4fc8a11a-91d1-4c3a-b5b1-25fab8b410ee',
-    #               "status": "ENABLED",
-    #               "name": "MyBankingService",
-    #               "apiKey": '5cb69f54-4f1f-4b0f-911f-e1d09dc360f1',
-    #               "statusMessage": "success",
-    #               "createUserId": "admin"
-    #             }
-    #         }
-    # return make_response(jsonify(result),201)
-
-
-    # #Prepare for headers
-    headers = {
-                'Authorization':"Basic QUJDREVGR0hJSktMTU5PUFFSUzEyMzQ1Njc4OTA="
-              }
-
-    data = {
-            'name':'MyBankingService', 
-            'appId':'https://mybankingservice.mybluemix.net/trp/uaf/trustedfacets', 
-            'id':'83b39eb7-3ac9-4fe6-8fc2-0c42fa015606', 
-            'createUserId':'admin'
+    # Sample credential
+    result={"credentials":     
+                {
+                  "statusCode": "1200",
+                  "id": '4fc8a-b5b1-25fab8b410ee',
+                  "status": "ENABLED",
+                  "name": "myFakeAppService",
+                  "apiKey": '5cf4-4f1f-4b0f-911f-e1d0f1',
+                  "statusMessage": "success",
+                  "createUserId": "admin"
+                }
             }
-
-    fido_response = requests.get(fido_admin_url, headers=headers)
-    fido_response_object = fido_response.json()
-    print("fido_response_object : ", fido_response_object)
-    print("fido_response_object['items'] : ", fido_response_object['items'])
-    # print("fido_response_object['items'] appid : ", fido_response_object['items'][0]['appId'])
-
-    for item in fido_response_object['items']:
-        if item['id'] == '83b39eb7-3ac9-4fe6-8fc2-0c42fa015606' :
-            credentials = {'credentials': {'uri': service_dashboard, 'id': item['id'], 'apiKey': item['apiKey']}}
-            print("credentials : ", jsonify(credentials))
-
-            return make_response(jsonify(credentials),201)
+    return make_response(jsonify(result),201)
         
 
-    # result={"credentials":     {
-    # "createUserId": "createUserId",
-    # "status": "ENABLED",
-    # "statusMessage": "success",
-    # "apiKey": "2ce0195c-8d02-49fe-86c9-02e75c994f80", 
-    # "name": "adminapi20161847",
-    # "id": "80b3af09-f901-4886-946c-c21c274a1dcc", 
-    # "statusCode": "1200"
-    # }}
-    # return make_response(jsonify(result),201)
-
-
-
-    #     if item['id'].str() is '83b39eb7-3ac9-4fe6-8fc2-0c42fa015606' :
-    #         print("item['id'].str()", item['id'].str())
-
-    # for item in fido_response_object['items']:
-    #     if item['appId'] == 'https://mybankingservice.mybluemix.net/trp/uaf/trustedfacets' :
-    #         fido_result = item.json()
-    #         print("fido_result : ", fido_result)
-    #         fido_response_object.status_code = 200
-    #     else :
-    #         fido_response = requests.post(fido_admin_url, data=json.dumps(data), headers=headers)
-    #         print("Register Fido Id : ", fido_response.text)
-    #         fido_result = fido_response.json()
-    #         fido_response_object.status_code = 200
-
-    # return fido_response_object
-    # try:
-    #     fido_result = ''
-    #     # print("fido_response json : ", fido_response.json())
-    #     print("fido register get begin ")
-    #     fido_response = requests.get(fido_admin_url, headers=headers)
-    #     print("fido register get end ")
-    #     fido_response_object = fido_response.json()
-
-    #     print("fido_response_object : ", fido_response_object)
-
-    #     for item in fido_response_object['items']:
-    #         if item['appId'] == 'https://mybankingservice.mybluemix.net/trp/uaf/trustedfacets' :
-    #             fido_result = item.json()
-    #             print("fido_result : ", fido_result)
-    #             fido_response_object.status_code = 200
-    #         else :
-    #             fido_response = requests.post(fido_admin_url, data=json.dumps(data), headers=headers)
-    #             print("Register Fido Id : ", fido_response.text)
-    #             fido_result = fido_response.json()
-    #             fido_response_object.status_code = 200
-    # except requests.exceptions.ConnectionError as e:
-    #     error_response = str(e.args[0])
-    #     return make_response(error_response,500)  
-    # except requests.exceptions.ConnectTimeout as e:
-    #     error_response = 'Connection Timeout ' 
-    #     return make_response(error_response,500)  
-    # except requests.exceptions.HTTPError as e:
-    #     error_response = str(e.args[0])
-    #     return make_response(error_response,500)  
-     
-
-    # #Request Failed
-    # if fido_response_object.status_code != 200:
-    #     print("fido_response - error : ", fido_response_object.reason)
-    #     error_response = 'fido registration failed. am error =  ' + fido_response_object.text
-    #     return make_response(error_response,fido_response_object)
-
-
-    # #Request Succeeded
-    # if fido_response_object.status_code == 200:
-    #     # fido_result = fido_response.json()
-    #     # #load credentials
-    #     # credentials['credentials']['username'] = fido_result['id']
-    #     # credentials['credentials']['apiKey'] = fido_result['apiKey']
-
-    #     return make_response(fido_result,200) # TODO to define error code
-    # else:
-    #     return make_response(fido_response_object.text,500) # TODO to define error code
 
 
 #
@@ -396,7 +262,7 @@ def unbind(instance_id, binding_id):
 #
 ########################################################
 
-@app.route('/fido-service/dashboard/<instance_id>', methods=['GET'])
+@app.route('/my-service/dashboard/<instance_id>', methods=['GET'])
 def dashboard(instance_id):
     # hardcoded HTML, but could be a rendered template, too
     # Consider offering customized page for different instances
@@ -415,9 +281,9 @@ def dashboard(instance_id):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    page = '<title>Fido Service Broker</title>'
-    page += '<h2>This is a sample service broker for Samsung SDS Nexsign: Fido Solution</h2>'
-    page += '<p>See <a href="https://github.com/Mike-msoh/fido-service-broker">the related GitHub repository</a> for details.</p>'
+    page = '<title>insator Service Broker</title>'
+    page += '<h2>This is a sample service broker for Samsung SDS Nexsign: insator Solution</h2>'
+    page += '<p>See for details.</p>'
     page += '<p>You requested path: /%s </p>' % path
     return page
 

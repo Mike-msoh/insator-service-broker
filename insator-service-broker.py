@@ -74,7 +74,7 @@ else:
 # Global Variables : Insator Specific
 #############################################################
 
-service_dashboard = 'http://image.samsungsds.com/global/en/solutions/off/insa/hero/__icsFiles/afieldfile/2016/12/16/vb_off_insa_w.jpg?queryString=20170301110352'
+service_dashboard = 'http://news.samsungsds.com/wp-content/uploads/2016/10/16-1.png'
 # service_dashboard = 'http://fido-ui-service.mybluemix.net'
 # service_dashboard = "http://"+service_base+"/my-service//dashboard/"
 

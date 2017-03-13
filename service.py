@@ -8,12 +8,12 @@ def insatorsvc():
 	insator_service = { 
          "bindable":True,
          "dashboard_client":{  
-            "id":"insator-broker-dashboard-4832-a349-48b0ca350171",
+            "id":"ab7e129f-f37a-4b2e-81f1-d346a2b5d44c",
             "redirect_uri":"http://localhost:1234",
             "secret":"86874ff3-dc02-45c1-baea-edcaa666e891"
          },
          "description":"Enterprise IoT platform by Samsung SDS",
-         "id":"insator-service-a9a4-2c16ae2eec90",
+         "id":"33d93d30-86d5-4d41-bb2d-9aa67dec9944",
          "tags":[
             "internet_of_things",
             "ibm_third_party"
@@ -87,7 +87,7 @@ def insatorsvc():
                "name":"free-plan",
                "description":"Free plan",
                "free" : True,
-               "id":"sds-insator-plan-8846-f17cefcfb6b4",
+               "id":"7cfb5457-dd82-4b5c-ac6f-9262caf7c21c",
                "metadata":{  
                   "asyncProvisioningSupported":False,
                   "bullets":[  

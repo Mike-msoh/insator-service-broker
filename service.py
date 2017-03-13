@@ -4,7 +4,7 @@ import uuid
 # Service
 
 def insatorsvc():
-	insator_service_id = uuid.uuid4() # Generate unique service ID
+	insator_service_id = '27a50a28-42ab-47e6-a7c6-e8066d8dcaa1' # Generate unique service ID
 	insator_service = {
 	    'id' : insator_service_id, 
 	    'name' : 'SDS-insator-auth-service',

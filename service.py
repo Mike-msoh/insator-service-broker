@@ -6,7 +6,7 @@ import uuid
 def insatorsvc():
 	insator_service_id = '27a50a28-42ab-47e6-a7c6-e8066d8dcaa1' # Generate unique service ID
 	insator_service = { 
-         "bindable":true,
+         "bindable":True,
          "dashboard_client":{  
             "id":"1e29dcd4-82e8-4832-a349-48b0ca350171",
             "redirect_uri":"http://localhost:1234",
@@ -21,7 +21,7 @@ def insatorsvc():
          "max_db_per_node":5,
          "metadata":{  
             "displayName":"Insator",
-            "embeddableDashboard":false,
+            "embeddableDashboard":False,
             "provider":{  
                "name":"Samsung SDS"
             },
@@ -73,7 +73,7 @@ def insatorsvc():
 
             ],
 
-            "serviceKeysSupported":false,
+            "serviceKeysSupported":False,
             "imageUrl":"https://sds-insator-ui-service.mybluemix.net/image/catalog/Iot-Connectivity_50.png",
             "smallImageUrl":"https://sds-insator-ui-service.mybluemix.net/image/catalog/Iot-Connectivity_24.png",
             "mediumImageUrl":"https://sds-insator-ui-service.mybluemix.net/image/catalog/Iot-Connectivity_32.png",
@@ -81,15 +81,15 @@ def insatorsvc():
             "documentationUrl":"https://sds-insator-ui-service.mybluemix.net/image/guide.html"
          },
          "name":"Insator",
-         "plan_updateable":true,
+         "plan_updateable":True,
          "plans":[ 
             {  
                "name":"Free plan",
                "description":"Free plan",
-               "free" : true,
+               "free" : True,
                "id":"13a525e9-6fb8-42ad-8846-f17cefcfb6b4",
                "metadata":{  
-                  "asyncProvisioningSupported":false,
+                  "asyncProvisioningSupported":False,
                   "bullets":[  
                     "TBD"
                   ],

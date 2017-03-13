@@ -84,7 +84,7 @@ def insatorsvc():
          "plan_updateable":True,
          "plans":[ 
             {  
-               "name":"Free plan",
+               "name":"Free-plan",
                "description":"Free plan",
                "free" : True,
                "id":"13a525e9-6fb8-42ad-8846-f17cefcfb6b4",

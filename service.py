@@ -81,7 +81,7 @@ def insatorsvc():
             "documentationUrl":"https://sds-insator-ui-service.mybluemix.net/image/guide.html"
          },
          "name":"SDS-insator-auth-service",
-         "plan_updateable":True,
+         "plan_updateable":False,
          "plans":[ 
             {  
                "name":"free-plan",

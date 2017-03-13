@@ -80,11 +80,11 @@ def insatorsvc():
             "featuredImageUrl":"https://sds-insator-ui-service.mybluemix.net/image/catalog/Iot-Connectivity_64.png",
             "documentationUrl":"https://sds-insator-ui-service.mybluemix.net/image/guide.html"
          },
-         "name":"Insator",
+         "name":"SDS-insator-auth-service",
          "plan_updateable":True,
          "plans":[ 
             {  
-               "name":"Free-plan",
+               "name":"free-plan",
                "description":"Free plan",
                "free" : True,
                "id":"13a525e9-6fb8-42ad-8846-f17cefcfb6b4",

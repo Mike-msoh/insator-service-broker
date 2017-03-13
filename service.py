@@ -21,7 +21,7 @@ def insatorsvc():
          "max_db_per_node":5,
          "metadata":{  
             "displayName":"Insator",
-            "embeddableDashboard":False,
+            "embeddableDashboard":True,
             "provider":{  
                "name":"Samsung SDS"
             },
